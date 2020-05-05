@@ -1,0 +1,7 @@
+<% if(articles.length) { %>
+    <% articles.forEach (a => { %>
+        <a href="articles/<%= a.id %>"><h4><%= a.title %></h4></a>
+    <% })%>
+<% } else { %>
+    <h4>Page Not Found</h4>
+<% } %>

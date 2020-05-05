@@ -1,0 +1,13 @@
+<h3><%= article.title %></h3>
+<p><%= article.description %></p>
+
+<% comments.forEach(c => { %>
+    <p><%=p.content %></p>
+    <p><%=p.author %></p>
+<% }) %>
+
+<form action="/articles/<%= article.id %>" method="POST">
+    <input type="text" name="content" placeholder="Add comment..">
+    <input type="text" name="author" placeholder="Add author...">
+    <input type="submit" value="Comment">
+</form>
