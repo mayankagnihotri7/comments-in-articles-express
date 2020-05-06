@@ -1,9 +1,12 @@
 <h3><%= article.title %></h3>
 <p><%= article.description %></p>
 
+<h2>Comments:</h2>
 <% comments.forEach(c => { %>
-    <p><%=p.content %></p>
-    <p><%=p.author %></p>
+    <p>Content: <%= c.content %></p>
+    <p>Author: <%= c.author %></p>
+    <a href="/articles/<%= article.id %>/comments/<%= c.id %>/edit">Edit</a>
+    <a href="/articles/<%= article.id %>/comments/<%= c.id %>/delete">Delete</a>
 <% }) %>
 
 <form action="/articles/<%= article.id %>" method="POST">
