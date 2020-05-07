@@ -8,6 +8,16 @@ router.get('/home', (req,res) => {
     res.render('home');
 })
 
+// Login
+router.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// Register
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
 // creating article.
 router.get('/new', (req,res) => {
     res.render('articleForm');
@@ -18,6 +28,22 @@ router.post('/new', (req,res) => {
     Article.create(req.body, (err,article) => {
         if (err) return next(err);
         res.redirect('/articles');
+    })
+})
+
+// Editing article.
+router.get('/:id/edit', (req,res, next) => {
+    Article.findById(req.params.id, (err,article) => {
+        if (err) return next (err);
+        res.render('editArticle', { article });
+    })
+})
+
+// Updating article.
+router.post('/:id/edit', (req,res) => {
+    Article.findByIdAndUpdate(req.params.id, req.body, (err,article) => {
+        if (err) next(err);
+        res.redirect(`/articles/${req.params.id}`);
     })
 })
 
@@ -54,6 +80,14 @@ router.post('/:id', (req,res,next) => {
             if (err) return next(err);
             res.redirect(`/articles/${id}`);
         })
+    })
+})
+
+// Deleting article.
+router.get('/:id/delete', (req,res) => {
+    Article.findByIdAndDelete(req.params.id, (err,data) => {
+        if (err) return next (err);
+        res.redirect('/articles');
     })
 })
 

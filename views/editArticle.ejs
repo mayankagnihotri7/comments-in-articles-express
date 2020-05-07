@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<form action="/articles/<%= article.id %>/edit" method="post">
+    <input type="text" name="title" value="<%= article.title %>">
+    <input type="text" name="description" value="<%= article.description %>">
+    <button type="submit">Update</button>
+</form>

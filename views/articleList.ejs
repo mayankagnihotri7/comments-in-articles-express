@@ -1,7 +1,18 @@
-<% if(articles.length) { %>
-    <% articles.forEach (a => { %>
-        <a href="/articles/<%= a.id %>"><h4><%= a.title %></h4></a>
-    <% })%>
-<% } else { %>
-    <h4>Page Not Found</h4>
-<% } %>
+<link rel="stylesheet" href="/stylesheets/style.css">
+
+<div class="all-centre">
+
+    <a href="/articles/home"><button>Home</button></a>
+    <a href="/articles/new"><button>Create Article</button></a>
+    
+    <% if(articles.length) { %>
+        <% articles.forEach (a => { %>
+            <div class="article-heading">
+                <a href="/articles/<%= a.id %>"><h4><%= a.title %></h4></a>
+            </div>
+        <% })%>
+    <% } else { %>
+        <h4>Page Not Found</h4>
+    <% } %>
+
+</div>

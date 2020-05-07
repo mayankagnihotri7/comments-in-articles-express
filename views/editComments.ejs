@@ -1,5 +1,7 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
 
+<a href="/articles/home">Home</a>
+
 <form action="/comments/<%= comment.id %>/edit" method="POST">
     <input type="text" name="content" value="<%= comment.content %>">
     <input type="text" name="author" value="<%= comment.author %>">
