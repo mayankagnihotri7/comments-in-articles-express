@@ -1,8 +1,25 @@
 let express = require('express');
 let router = express.Router();
 let Article = require('../models/article');
-let Comment = require('../models/comment')
-// let commentRouter = require('./comments');
+let Comment = require('../models/comment');
+
+// Home
+router.get('/home', (req,res) => {
+    res.render('home');
+})
+
+// creating article.
+router.get('/new', (req,res) => {
+    res.render('articleForm');
+})
+
+// submitting article form to create it.
+router.post('/new', (req,res) => {
+    Article.create(req.body, (err,article) => {
+        if (err) return next(err);
+        res.redirect('/articles');
+    })
+})
 
 // Getting articles list.
 router.get('/', (req,res,next) => {
@@ -14,12 +31,13 @@ router.get('/', (req,res,next) => {
 
 // Getting article details and adding comments.
 router.get('/:id', (req,res,next) => {
-    Article.findById(req.params.id, (err, article) => { //Getting object id from the url.
+    var articleId = req.params.id;
+    console.log(articleId);
+    Article.findById(articleId) //Getting object id from the url.
+    .populate('comments', 'content author')
+    .exec((err, article) => {
         if (err) return next(err);
-        Comment.find({articleId: req.params.id}, (err, comments) => { //if article id is equal or contains the id obtained from url.
-            if (err) return next(err);
-            res.render('articleDetails', {article, comments}); //rendering the page at which article details needs to be shown.
-        })
+        res.render("articleDetails", { article});
     })
 });
 
@@ -29,40 +47,13 @@ router.post('/:id', (req,res,next) => {
     req.body.articleId = id;
     Comment.create(req.body, (err,comment) => {
         if (err) return next(err);
-        res.redirect(`/articles/${id}`);
-    })
-})
 
-// Editing Comments.
-router.get('/:articleId/comments/:commentId/edit', (req,res,next) => {
-    Article.findById(req.params.articleId, (err,article) => {
-        console.log(article, 'Article id here...')
-        if(err) return next(err);
-        Comment.findById(req.params.commentId, (err,data) => { //finding comment to update by it's id and updating it with the content of body.
-        //console.log(req.params.commentId, 'Comment id reporting on duty.');
-        //console.log(data, 'Comment data here!')
-            if(err) return next(err);
-            res.render('editComments', {article, data});
+        // update article's comments array with newly created comment id
+        Article.findByIdAndUpdate(id, {$push: {comments: comment.id}}, {new:true} ,(err,data) => {
+            console.log(id, 'received');
+            if (err) return next(err);
+            res.redirect(`/articles/${id}`);
         })
-    })
-})
-
-// Submitting the update form.
-router.post('/:articleId/comments/:commentId/edit', (req,res,next) => {
-    console.log('Here');
-    console.log(req.params.articleId, 'Hello!');
-    req.body.articleId = req.params.articleId;
-    Comment.findByIdAndUpdate(req.params.commentId, req.body,(err,comment) => {
-        console.log(comment, 'Comments Here!');
-        res.redirect(`/articles/${req.params.articleId}`);
-    })
-})
-
-// Deleting article.
-router.get('/:articleId/comments/:commentId/delete', (req,res,next) => {
-    Comment.findByIdAndDelete(req.params.commentId, (err, deleted) => {
-        if (err) return next(err);
-        res.redirect(`/articles/${req.params.articleId}`);
     })
 })
 
