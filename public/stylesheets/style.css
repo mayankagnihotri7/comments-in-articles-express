@@ -54,21 +54,32 @@ table {
 body {
   padding: 50px;
   font: 14px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background: #2980b9;
+  background: linear-gradient(#1A2980, #26D0CE);
   line-height: 1.7;
+  color: beige;
 }
 
 a {
   text-decoration: none;
+  color: lightskyblue;
 }
 
 button {
   padding: 8px 12px;
   font-size: 18px;
   margin-left: 15px;
-  border: 1px solid #f1f1f1;
   border-radius: 10px;
+  border: none;
   outline: none;
+  color: #ffffff;
+  background-color: transparent;
+}
+
+button:hover {
+  background-color: seashell;
+  color: blueviolet;
+  border: none;
+  cursor: pointer;
 }
 
 .all-centre {
@@ -85,7 +96,8 @@ button {
 .login-form {
   width: 45%;
   margin: 0 auto;
-  border: 1px solid #f1f1f1;
+  /* border: 1px solid #f1f1f1; */
+  box-shadow: 1px 1px 3px whitesmoke;
 }
 
 .login-input {
@@ -153,4 +165,46 @@ button {
   outline: none;
   border-bottom: 1px solid #555555;
   background: transparent;
+}
+
+.article-details > h2 {
+  text-decoration: underline;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.article-details > h3 {
+  font-size: 16px;
+  color: lavender;
+}
+
+.article-details > p {
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+  color: gold;
+}
+
+.edit-article {
+  display: block;
+  margin-bottom: 1rem;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: transparent;
+  box-shadow: 0 1px 0 0 yellow;
+  outline: none;
+}
+
+.edit_article-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  /* height: 70vh; */
+}
+
+.title {
+  font-size: 20px;
+  font-family: 'Dancing Script', cursive;
 }

@@ -1,7 +1,15 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
+<script src="https://kit.fontawesome.com/f4e5dcf0e0.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<i class="fab fa-pied-piper-alt fa-9x"></i>
+<p class="title">Smokin' Smoked Piper</p>
 
-<form action="/articles/new" method="post">
-    <input type="text" name="title" placeholder="Enter title">
-    <input type="text" name="description" placeholder="Enter description">
-    <button type="submit">Create</button>
-</form>
+<a href="/articles/home"><button>Home</button></a>
+
+<div class="edit_article-flex">
+    <form action="/articles/new" method="post">
+        <input type="text" name="title" placeholder="Enter title" class="edit-article">
+        <textarea name="edit-article" cols="30" rows="10" class="edit-article"></textarea>
+        <button type="submit">Create</button>
+    </form>
+</div>

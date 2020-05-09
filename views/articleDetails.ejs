@@ -1,4 +1,8 @@
 <link rel="stylesheet" href="/stylesheets/style.css">
+<script src="https://kit.fontawesome.com/f4e5dcf0e0.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<i class="fab fa-pied-piper-alt fa-9x"></i>
+<p class="title">Smokin' Smoked Piper</p>
 
 <div class="container">
     <div class="article_btn-flex">
@@ -8,23 +12,27 @@
     </div>
     
     <div class="article-details">
+        <h2 class="article-title">Title:</h2>
         <h3><%= article.title %></h3>
+        <h2>Description:</h2>
         <p><%= article.description %></p>
     </div>
     
-    <% article.comments.forEach(c => { %>
         <div class="article-details">
             <form action="/articles/<%= article.id %>" method="POST">
                 <input type="text" name="content" placeholder="Add comment.." class="comment-input">
                 <input type="text" name="author" placeholder="Add author..." class="comment-input">
                 <button type="submit">Comment</button>
             </form>
+        </div>
+        <div class="article-details">
+    <% article.comments.forEach(c => { %>
             <h2>Comments:</h2>
             <p>Content: <%= c.content %></p>
             <p>Author: <%= c.author %></p>
             <a href="/comments/<%= c.id %>/edit">Edit</a>
             <a href="/comments/<%= c.id %>/delete">Delete</a>
-        </div>
     <% }) %>
+        </div>
     
 </div>
